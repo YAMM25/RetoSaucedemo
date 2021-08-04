@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverController {
 
@@ -15,5 +17,14 @@ public class DriverController {
         options.addArguments("--incognito");
         options.addArguments("--ignore-certificate-errors");
         return new ChromeDriver(options);
+    }
+
+    public static WebDriver getDriverFireFox() {
+
+        WebDriverManager.firefoxdriver().setup();
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("--lang=es");
+        return new FirefoxDriver(options);
+
     }
 }

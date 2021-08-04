@@ -3,14 +3,20 @@ package steps;
 import com.co.sofka.web.controllers.BusinessController;
 import com.co.sofka.web.controllers.DriverController;
 import com.co.sofka.web.datos.DatosBase;
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.es.Cuando;
 import cucumber.api.java.es.Dado;
 import cucumber.api.java.es.Entonces;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -38,8 +44,10 @@ public class AutenticationSteps {
     }
 
     @Entonces("^se autentica en el sitio correctamente$")
-    public void seAutenticaEnElSitioCorrectamente() {
+    public void seAutenticaEnElSitioCorrectamente() throws IOException {
         Assert.assertEquals(BusinessController.getTitleHome(driver), "PRODUCTS");
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("src/main/resources/screenshots/PageHome.png"));
     }
 
     @Cuando("^el usuario ingresa un \"([^\"]*)\" y \"([^\"]*)\" correcto$")
@@ -48,25 +56,30 @@ public class AutenticationSteps {
     }
 
     @Entonces("^se presenta un mensaje de error por usuario bloqueados$")
-    public void sePresentaUnMensajeDeErrorPorUsuarioBloqueados() {
+    public void sePresentaUnMensajeDeErrorPorUsuarioBloqueados() throws IOException {
         Assert.assertEquals(BusinessController.getloginUserError(driver), "Epic sadface: Sorry, this user has been locked out.");
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("src/main/resources/screenshots/LogoutBloqueado.png"));
     }
 
-    @Cuando("^el usuario ingresa un \"([^\"]*)\" y/o \"([^\"]*)\" correcto$")
-    public void elUsuarioIngresaUnYOCorrecto(String username, String password) {
+    @Cuando("^el usuario ingresa un \"([^\"]*)\" y \"([^\"]*)\" incorrecto$")
+    public void elUsuarioIngresaUnYIncorrecto(String username, String password)  {
         BusinessController.loginUser(driver, username, password);
     }
 
     @Entonces("^se presenta un mensaje de error por usuario incorrecto$")
-    public void sePresentaUnMensajeDeErrorPorUsuarioIncorrecto() {
+    public void sePresentaUnMensajeDeErrorPorUsuarioIncorrecto() throws IOException {
         Assert.assertEquals(BusinessController.getloginUserError(driver),
                 "Epic sadface: Username and password do not match any user in this service");
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("src/main/resources/screenshots/LoginIncorrecto.png"));
     }
 
     @After
     public void tearDown() {
         driver.quit();
     }
+
 
 
 }

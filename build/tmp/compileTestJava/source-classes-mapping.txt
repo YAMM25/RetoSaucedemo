@@ -2,11 +2,11 @@ runners/TestRunnerProduct.java
  runners.TestRunnerProduct
 runners/TestRunnerAutentication.java
  runners.TestRunnerAutentication
-steps/AutenticationSteps.java
- steps.AutenticationSteps
-steps/PurchaseProductSteps.java
- steps.PurchaseProductSteps
 runners/TestRunnerPurchaseProduct.java
  runners.TestRunnerPurchaseProduct
+steps/AutenticationSteps.java
+ steps.AutenticationSteps
 steps/ProductSteps.java
  steps.ProductSteps
+steps/PurchaseProductSteps.java
+ steps.PurchaseProductSteps

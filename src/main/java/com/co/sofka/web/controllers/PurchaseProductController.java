@@ -29,9 +29,9 @@ public class PurchaseProductController {
         }
     }
 
-    public static void clickButtonAddToCart(HomePage page, String producto) {
+    public static void clickButtonAddToCart(HomePage page, int producto) {
         page.addToListButtons();
-        page.getListButton().get(Integer.parseInt(producto)).click();
+        page.getListButton().get(producto).click();
     }
 
     public static void clickIntoCart(YourCartPage cartPage){
@@ -40,14 +40,6 @@ public class PurchaseProductController {
 
     public static String getTitleYourCartPage(YourCartPage cartPage){
         return cartPage.getTitlePage().getText();
-    }
-
-    public static boolean isVisibleProduct(YourCartPage cartPage){
-        return cartPage.getSelectedProduct().isDisplayed();
-    }
-
-    public static String getTextButtonCheckout(YourCartPage cartPage){
-        return cartPage.getButtonCheckout().getText();
     }
 
     public static void clickIntoButtonCheckout(YourCartPage cartPage){
@@ -86,4 +78,6 @@ public class PurchaseProductController {
     public static String getMessageFinal(CheckoutCompletePage completePage){
         return completePage.getMessage().getText();
     }
+
+
 }

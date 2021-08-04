@@ -42,9 +42,11 @@ public class ProductSteps {
     }
 
     @Entonces("^se visualizan los nombres de los articulos$")
-    public void seVisualizanLosNombresDeLosArticulos() {
+    public void seVisualizanLosNombresDeLosArticulos() throws IOException {
         HomePage page = new HomePage(driver);
         ProductController.isVisibleProducts(page);
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("src/main/resources/screenshots/Articulo.png"));
     }
 
     @Dado("^un usuario en la pagina PRODUCTS de soucedemo$")
@@ -60,9 +62,11 @@ public class ProductSteps {
     }
 
     @Entonces("^se visualizara en el carrito$")
-    public void seVisualizaraEnElCarrito() {
+    public void seVisualizaraEnElCarrito() throws IOException {
         HomePage page = new HomePage(driver);
         Assert.assertEquals(BusinessController.lookingCart(page), "1");
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("src/main/resources/screenshots/Carrito.png"));
     }
 
 

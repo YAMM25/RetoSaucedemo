@@ -20,3 +20,11 @@ Característica: Login de usuario
       | usuario       | clave        |
       | locked_out_user | secret_sauce |
 
+  Esquema del escenario: Autenticación fallida por usuario incorrecto
+    Dado un usuario en la pagina inicial de souce demo
+    Cuando el usuario ingresa un "<usuario>" y "<clave>" incorrecto
+    Entonces se presenta un mensaje de error por usuario incorrecto
+
+    Ejemplos:
+      | usuario       | clave        |
+      | locked_out_user | secret_sau |

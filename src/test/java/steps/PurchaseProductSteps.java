@@ -11,8 +11,14 @@ import cucumber.api.java.es.Cuando;
 import cucumber.api.java.es.Dado;
 import cucumber.api.java.es.Entonces;
 import cucumber.api.java.es.Y;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import java.io.File;
+import java.io.IOException;
 
 public class PurchaseProductSteps {
 
@@ -21,7 +27,8 @@ public class PurchaseProductSteps {
 
     @Before
     public void setup() {
-        driver = DriverController.getDriver();
+       driver = DriverController.getDriver();
+        //driver = DriverController.getDriverFireFox();
     }
 
     @Dado("^que el cliente se encuentra logueado$")
@@ -36,9 +43,9 @@ public class PurchaseProductSteps {
     }
 
     @Cuando("^el cliente agrega un producto al carrito$")
-    public void elClienteAgregaUnProductoAlCarrito(int producto) {
+    public void elClienteAgregaUnProductoAlCarrito() {
         HomePage page = new HomePage(driver);
-        BusinessController.clickButtonAddToCart(page, producto);
+        PurchaseProductController.clickButtonAddToCart(page,1);
     }
 
     @Y("^el cliente se dirija al carrito$")
@@ -80,10 +87,11 @@ public class PurchaseProductSteps {
     }
 
     @Entonces("^el cliente visualiza el mensaje \"([^\"]*)\"$")
-    public void elClienteVisualizaElMensaje(String mensaje)  {
+    public void elClienteVisualizaElMensaje(String mensaje) throws IOException {
         CheckoutCompletePage completePage = new CheckoutCompletePage(driver);
         Assert.assertEquals(PurchaseProductController.getMessageFinal(completePage), mensaje);
-
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("src/main/resources/screenshots/Compra.png"));
     }
 
     @After
