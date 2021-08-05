@@ -12,22 +12,7 @@ public class PurchaseProductController {
 
     private WebDriver dirver;
 
-    public static boolean isVisibleButtons(HomePage page) {
-        int countButton = 0;
-        page.addToListButtons();
-        for (int i = 0; i < page.getListButton().size(); i++) {
-            if (page.getListButton().get(i).isDisplayed()) {
-                Assert.assertTrue(page.getListButton().get(i).isDisplayed());
-                countButton++;
-            }
-            System.out.println(page.getListButton().get(i).getText());
-        }
-        if (countButton == 6) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
     public static void clickButtonAddToCart(HomePage page, int producto) {
         page.addToListButtons();
